@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "glm-data-prep"
+version = "0.1.0"
+description = "GLM Data Preparation Tool for Insurance Actuarial Analysis"
+requires-python = ">=3.9"
+dependencies = [
+    "polars[all]>=0.20",
+    "glum>=2.1.0",
+    "statsmodels>=0.14",
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "fastapi>=0.104",
+    "uvicorn>=0.24",
+    "python-multipart>=0.0.6",
+    "pydantic>=2.0",
+    "python-dateutil>=2.8",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "pytest-cov>=4.1",
+    "black>=23.0",
+    "flake8>=6.0",
+    "mypy>=1.0",
+]
+
+[project.scripts]
+glm-data-prep = "glm_data_prep.cli:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
