@@ -194,9 +194,7 @@ class PremiumProcessor:
         else:
             # Assign period as year of effective start
             df = df.with_columns(
-                pl.col("__effective_start")
-                .map_elements(lambda x: x.year, return_dtype=pl.Int32)
-                .alias("Period")
+                pl.col("__effective_start").dt.year().alias("Period")
             )
 
         # Rename premium column and drop temporary columns

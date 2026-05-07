@@ -74,11 +74,11 @@ class TestNumericalBinning:
 
         assert "Age_Binned" in result.columns
         binned = result["Age_Binned"].to_list()
-        assert binned[0] == "Young"  # 20
-        assert binned[1] == "Young"  # 30 (lower boundary inclusive)
-        assert binned[2] == "Middle"  # 45
-        assert binned[3] == "Middle"  # 55
-        assert binned[4] == "Senior"  # 70
+        assert binned[0] == "Young"  # 20 in [0, 30)
+        assert binned[1] == "Middle"  # 30 in [30, 50)
+        assert binned[2] == "Middle"  # 45 in [30, 50)
+        assert binned[3] == "Senior"  # 55 in [50, 100]
+        assert binned[4] == "Senior"  # 70 in [50, 100]
 
     def test_binning_with_boundary_values(self):
         """Test binning at exact boundaries."""

@@ -96,17 +96,15 @@ class ClaimsProcessor:
                 "study_period", removed_by_period, "Outside study period"
             )
 
-        # Assign period as year of loss date
+        # Assign period as year of loss date and drop old date column
         df = df.with_columns(
-            pl.col("__loss_date")
-            .map_elements(lambda x: x.year, return_dtype=pl.Int32)
-            .alias("Period")
-        )
+            pl.col("__loss_date").dt.year().alias("Period")
+        ).drop(loss_date_col)
 
         # Rename columns
         claims1 = df.rename({
             uid_col: "UID",
-            loss_date_col: "LossDate",
+            "__loss_date": "LossDate",
             claim_type_col: "ClaimType",
             claim_amount_col: "ClaimAmount",
         }).select([
