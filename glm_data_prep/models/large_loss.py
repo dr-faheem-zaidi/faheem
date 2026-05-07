@@ -48,33 +48,41 @@ class LargeLossProcessor:
 
             if threshold is not None:
                 # Cap the claim
-                capped = pl.when(mask & (df["ClaimAmount"] > threshold))
+                capped = (
+                    pl.when(mask & (df["ClaimAmount"] > threshold))
                     .then(pl.lit(threshold))
                     .otherwise(
                         pl.when(mask).then(df["ClaimAmount"]).otherwise(df["ClaimAmount_Capped"])
                     )
                     .alias("ClaimAmount_Capped")
+                )
 
                 # Calculate excess
-                excess = pl.when(mask & (df["ClaimAmount"] > threshold))
+                excess = (
+                    pl.when(mask & (df["ClaimAmount"] > threshold))
                     .then(df["ClaimAmount"] - threshold)
                     .otherwise(
                         pl.when(mask).then(pl.lit(0.0)).otherwise(df["ClaimAmount_LL"])
                     )
                     .alias("ClaimAmount_LL")
+                )
 
                 df = df.with_columns([capped, excess])
             else:
                 # No capping: capped = actual, excess = 0
                 df = df.with_columns([
-                    pl.when(mask)
-                    .then(df["ClaimAmount"])
-                    .otherwise(df["ClaimAmount_Capped"])
-                    .alias("ClaimAmount_Capped"),
-                    pl.when(mask)
-                    .then(pl.lit(0.0))
-                    .otherwise(df["ClaimAmount_LL"])
-                    .alias("ClaimAmount_LL"),
+                    (
+                        pl.when(mask)
+                        .then(df["ClaimAmount"])
+                        .otherwise(df["ClaimAmount_Capped"])
+                        .alias("ClaimAmount_Capped")
+                    ),
+                    (
+                        pl.when(mask)
+                        .then(pl.lit(0.0))
+                        .otherwise(df["ClaimAmount_LL"])
+                        .alias("ClaimAmount_LL")
+                    ),
                 ])
 
         return df
