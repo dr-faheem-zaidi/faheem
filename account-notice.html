@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Account Notice</title>
+  <style>
+    :root { color-scheme: light; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #eef1f5;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .card {
+      background: #ffffff;
+      width: 100%;
+      max-width: 460px;
+      border-radius: 14px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+      overflow: hidden;
+    }
+    .header {
+      background: #2563eb;
+      color: #ffffff;
+      padding: 22px 28px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .header .bell { font-size: 20px; }
+    .header h1 {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+    .body { padding: 28px; }
+    .body p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #1f2937;
+      margin-bottom: 16px;
+    }
+    .body p.lead { font-weight: 600; }
+    .highlight {
+      background: #fef3c7;
+      border-left: 4px solid #f59e0b;
+      padding: 12px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      color: #92400e;
+      margin-bottom: 16px;
+    }
+    .terms { font-size: 13px; color: #6b7280; }
+    .signoff {
+      margin-top: 24px;
+      padding-top: 18px;
+      border-top: 1px solid #e5e7eb;
+      font-size: 14px;
+      color: #374151;
+    }
+    .signoff .name { font-weight: 600; color: #111827; }
+    .footer {
+      padding: 14px 28px;
+      background: #f9fafb;
+      font-size: 12px;
+      color: #9ca3af;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="header">
+      <span class="bell">&#128276;</span>
+      <h1>ACCOUNT NOTICE</h1>
+    </div>
+    <div class="body">
+      <p class="lead">We&rsquo;ve observed that this account is being used on multiple devices.</p>
+      <p>All devices have now been logged out.</p>
+      <div class="highlight">
+        Please reconnect using <strong>one device only</strong>, and do not sign in
+        from multiple devices at the same time.
+      </div>
+      <p class="terms">Kindly follow the terms and conditions.</p>
+      <div class="signoff">
+        &mdash; <span class="name">[Your name]</span><br />
+        Account owner
+      </div>
+    </div>
+    <div class="footer">
+      This is a personal notice from the account owner.
+    </div>
+  </main>
+</body>
+</html>
